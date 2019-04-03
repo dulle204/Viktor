@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PlayersDatav1.UnitOfWork;
+using PlayersDatav1.Repositories;
+using PlayersDatav1;
 
 namespace PlayersDomain
 {
@@ -38,8 +40,18 @@ namespace PlayersDomain
                     list.Add(model);
                 }
             }
+
             
             return list;
+        }
+
+        public void PostPlayers(Igrac igrac)
+        {
+            using (UnitOfWork ouw = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            {
+
+                ouw.IgracRepository.Insert(igrac);
+            }
         }
     }
 }
