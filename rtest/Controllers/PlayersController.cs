@@ -41,7 +41,7 @@ namespace rtest.Controllers
         }
 
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOsoba(int id, Igrac igrac)
+        public IHttpActionResult PutIgrac(int id, Igrac igrac)
         {
 
 
