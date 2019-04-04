@@ -33,7 +33,7 @@ namespace rtest.Controllers
             using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             {
 
-                uow.IgracRepository.(igrac);
+                uow.IgracRepository.InsertIgrac(igrac);
                 uow.Save();
                 return CreatedAtRoute("DefaultApi", new { id = igrac.ID }, igrac);
 
