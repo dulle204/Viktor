@@ -47,11 +47,30 @@ namespace PlayersDomain
 
         public void PostPlayers(Igrac igrac)
         {
-            using (UnitOfWork ouw = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             {
+   
 
-                ouw.IgracRepository.Insert(igrac);
+                
+                igrac.Ime = "Test1";
+                igrac.Prezime = "test2";
+                igrac.Tezina = 90;
+                igrac.Visina = 192;
+                igrac.Klub.NazivKluba = "Partizan";
+                igrac.Drzava.NazivDrzave = "Srbija";
+
+                if (igrac!=null)
+                {
+                    uow.IgracRepository.InsertIgrac(igrac);
+                }
+
             }
+        }
+
+       public void PutPlayers(int id,Igrac igrac)
+        {
+
+        
         }
     }
 }

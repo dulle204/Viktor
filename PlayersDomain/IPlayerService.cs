@@ -7,5 +7,6 @@ namespace PlayersDomain
         string Region { get; }
 
         List<IgracDomainModel> GetPlayers();
+        
     }
 }

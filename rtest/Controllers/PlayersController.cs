@@ -30,11 +30,11 @@ namespace rtest.Controllers
         [ResponseType(typeof(Igrac))]
         public IHttpActionResult PostIgrace([FromBody] Igrac igrac)
         {
-            using (UnitOfWork ouw = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             {
 
-                ouw.IgracRepository.Insert(igrac);
-                ouw.Save();
+                uow.IgracRepository.(igrac);
+                uow.Save();
                 return CreatedAtRoute("DefaultApi", new { id = igrac.ID }, igrac);
 
             }
@@ -50,11 +50,11 @@ namespace rtest.Controllers
                 return BadRequest();
             }
 
-            using (UnitOfWork ouw = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             {
 
-                ouw.IgracRepository.Update(igrac);
-                ouw.Save();
+                uow.IgracRepository.UpdateIgrac(igrac);
+                uow.Save();
 
 
                 return StatusCode(HttpStatusCode.NoContent);
