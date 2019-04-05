@@ -73,12 +73,15 @@ namespace PlayersDatav1.Repositories
 
         public void InsertIgrac(Igrac igrac)
         {
-       
 
-         
+            igrac.Ime = "Test1";
+            igrac.Prezime = "test2";
+            igrac.Tezina = 90;
+            igrac.Visina = 192;
+            igrac.Klub.NazivKluba = "Partizan";
+            igrac.Drzava.NazivDrzave = "Srbija";
 
-
-                playersContext.Igracs.Add(igrac);
+            playersContext.Igracs.Add(igrac);
                 playersContext.SaveChanges();
 
             
