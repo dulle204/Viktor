@@ -1,4 +1,5 @@
 ﻿using PlayersDatav1.UnitOfWork;
+using PlayersDomain.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace PlayersDomain
     public class PlayerServiceUS : IPlayerService
     {
         public string Region { get; } = "US";
+
+        public void AddPlayer(AddPlayerModel igrac)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<IgracDomainModel> GetPlayers()
         {
@@ -42,6 +48,11 @@ namespace PlayersDomain
             }
 
             return list;
+        }
+
+        public void UpdatePlayer(int id, AddPlayerModel igrac)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Players.ConsoleApp", "Players.ConsoleApp\Players.ConsoleApp.csproj", "{5150782E-D65E-449B-A4A3-08B16890B792}"
 EndProject
@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayersDatav1", "PlayersDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayersDomain", "PlayersDomain\PlayersDomain.csproj", "{968EE92C-944D-4DF6-B786-DC2DB584496E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rtest", "rtest\rtest.csproj", "{49D1CD1E-E066-4681-98FC-BB961BAF2EAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayersService.REST", "rtest\PlayersService.REST.csproj", "{49D1CD1E-E066-4681-98FC-BB961BAF2EAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerWebApp.EU", "PlayerWebApp.EU\PlayerWebApp.EU.csproj", "{FD315EFD-E029-43A1-8E03-05C692683173}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{49D1CD1E-E066-4681-98FC-BB961BAF2EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49D1CD1E-E066-4681-98FC-BB961BAF2EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49D1CD1E-E066-4681-98FC-BB961BAF2EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD315EFD-E029-43A1-8E03-05C692683173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD315EFD-E029-43A1-8E03-05C692683173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD315EFD-E029-43A1-8E03-05C692683173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD315EFD-E029-43A1-8E03-05C692683173}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PlayersDomain
 {
-    public class Factory
+    public class Factory : IFactory
     {
-        public List<IPlayerService> Instaces { get; set; }
+        private List<IPlayerService> Instaces { get; set; }
 
         public Factory()
         {

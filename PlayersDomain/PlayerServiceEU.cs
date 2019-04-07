@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PlayersDatav1.UnitOfWork;
 using PlayersDatav1.Repositories;
 using PlayersDatav1;
+using PlayersDomain.DomainModels;
 
 namespace PlayersDomain
 {
@@ -28,6 +29,7 @@ namespace PlayersDomain
 
                     model = new IgracDomainModel()
                     {
+                        ID = item.ID,
                         Ime = item.Ime,
                         Drzava = uow.DrzavaRepository.GetByID(item.DrzavaID).NazivDrzave,
                         Prezime = item.Prezime,
@@ -41,36 +43,43 @@ namespace PlayersDomain
                 }
             }
 
-            
+
             return list;
         }
 
-        public void PostPlayers(Igrac igrac)
+        public void AddPlayer(AddPlayerModel igrac)
         {
-            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
             {
-   
-
-                
-                igrac.Ime = "Test1";
-                igrac.Prezime = "test2";
-                igrac.Tezina = 90;
-                igrac.Visina = 192;
-                igrac.Klub.NazivKluba = "Partizan";
-                igrac.Drzava.NazivDrzave = "Srbija";
-
-                if (igrac!=null)
+                Igrac noviIgrac = new Igrac
                 {
-                    uow.IgracRepository.InsertIgrac(igrac);
-                }
+                    Ime = igrac.Ime,
+                    Prezime = igrac.Prezime,
+                    Tezina = igrac.Tezina,
+                    Visina = igrac.Visina,
+                    KlubID = igrac.KlubId,
+                    DrzavaID = igrac.DrzavaId
+                };
 
+                if (noviIgrac != null)
+                {
+                    uow.IgracRepository.Insert(noviIgrac);
+                    uow.Save();
+                }
             }
         }
 
-       public void PutPlayers(int id,Igrac igrac)
+        public void UpdatePlayer(int id, AddPlayerModel igrac)
         {
+            using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
+            {
+                var izmenjenIgrac = uow.IgracRepository.Get(x => x.ID == id).FirstOrDefault();
+                izmenjenIgrac.Ime = igrac.Ime;
+                izmenjenIgrac.KlubID = igrac.KlubId;
 
-        
+                uow.IgracRepository.Update(izmenjenIgrac);
+                uow.Save();
+            }
         }
     }
 }

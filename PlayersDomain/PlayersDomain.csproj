@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainModels\AddPlayerModel.cs" />
     <Compile Include="DomainModels\DrzavaDomenModel.cs" />
     <Compile Include="DomainModels\IgracDomainModel.cs" />
     <Compile Include="DomainModels\KlubDomainModel.cs" />
     <Compile Include="DomainModels\LigaDomianModel.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="IFactory.cs" />
     <Compile Include="IPlayerService.cs" />
     <Compile Include="PlayerServiceEU.cs" />
     <Compile Include="PlayerServiceUS.cs" />

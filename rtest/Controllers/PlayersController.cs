@@ -7,20 +7,26 @@ using System.Web.Http;
 using System.Web.Mvc;
 using PlayersDomain;
 using PlayersDatav1;
-
-
 using PlayersDatav1.UnitOfWork;
 using System.Web.Http.Description;
-
+using rtest.Models;
+using PlayersDomain.DomainModels;
 
 namespace rtest.Controllers
 {
     public class PlayersController : ApiController
     {
+        private readonly IFactory _factory;
+
+        public PlayersController()
+        {
+            //_factory = factory;
+            _factory = new Factory();
+        }
+
         public IEnumerable<IgracDomainModel> Get(string region)
         {
-            Factory factory = new Factory();
-            IPlayerService service = factory.GetInstance(region);
+            IPlayerService service = _factory.GetInstance(region);
             var data = service.GetPlayers();
 
             return data;
@@ -28,39 +34,49 @@ namespace rtest.Controllers
 
 
         [ResponseType(typeof(Igrac))]
-        public IHttpActionResult PostIgrace([FromBody] Igrac igrac)
+        public IHttpActionResult PostIgrace([FromBody]PlayerModel igrac, [FromUri]string region)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             {
+                IPlayerService service = _factory.GetInstance(region);
+                AddPlayerModel igracDomain = new AddPlayerModel()
+                {
+                    Ime = igrac.Ime,
+                    Prezime = igrac.Prezime,
+                    Tezina = igrac.Tezina,
+                    Visina = igrac.Visina,
+                    DrzavaId = igrac.DrzavaId,
+                    KlubId = igrac.KlubId
+                };
 
-                uow.IgracRepository.InsertIgrac(igrac);
-                uow.Save();
-                return CreatedAtRoute("DefaultApi", new { id = igrac.ID }, igrac);
+                service.AddPlayer(igracDomain);
 
+                return CreatedAtRoute("DefaultApi", 0, igrac);
             }
         }
 
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutIgrac(int id, Igrac igrac)
+        public IHttpActionResult PutIgrac(int id, [FromBody]PlayerModel igrac)
         {
-
-
-            if (id != igrac.ID)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            IPlayerService service = _factory.GetInstance("EU");
+            AddPlayerModel player = new AddPlayerModel
             {
+                Ime = igrac.Ime,
+                KlubId = igrac.KlubId
+            };
+            service.UpdatePlayer(id, player);
 
-                uow.IgracRepository.UpdateIgrac(igrac);
-                uow.Save();
-
-
-                return StatusCode(HttpStatusCode.NoContent);
-            }
-
+            return StatusCode(HttpStatusCode.Accepted);
         }
-
     }
 }
