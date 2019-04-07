@@ -18,10 +18,10 @@ namespace rtest.Controllers
     {
         private readonly IFactory _factory;
 
-        public PlayersController()
+        public PlayersController(IFactory factory)
         {
-            //_factory = factory;
-            _factory = new Factory();
+            _factory = factory;
+            //_factory = new Factory();
         }
 
         public IEnumerable<IgracDomainModel> Get(string region)
