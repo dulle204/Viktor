@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PlayerWebApp.EU.Models
 {
-    public class Igraci
+    public class Igrac
     {
         public string Ime { get; set; }
 
@@ -19,9 +19,8 @@ namespace PlayerWebApp.EU.Models
 
         public int DrzavaID { get; set; }
 
-       public Drzava Drzava { get; set; }
+     public Drzava Drzava { get; set; }
 
-       public Klub Klub { get; set; }
-
+     public Klub Klub { get; set; }
     }
 }

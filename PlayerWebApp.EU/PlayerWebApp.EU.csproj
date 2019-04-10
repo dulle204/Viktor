@@ -140,7 +140,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Drzava.cs" />
+    <Compile Include="Models\Igrac.cs" />
     <Compile Include="Models\Igraci.cs" />
+    <Compile Include="Models\Klub.cs" />
+    <Compile Include="Models\Liga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

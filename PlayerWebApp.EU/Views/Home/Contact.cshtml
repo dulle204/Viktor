@@ -1,17 +1,63 @@
-﻿@{
+﻿@model IEnumerable<PlayerWebApp.EU.Models.Igraci>
+
+@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<h2>Contact</h2>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Visina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tezina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KlubID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrzavaID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prezime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Visina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tezina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KlubID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrzavaID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
