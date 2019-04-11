@@ -31,7 +31,7 @@ namespace PlayersDomain
                     {
                         ID = item.ID,
                         Ime = item.Ime,
-                        Drzava = uow.DrzavaRepository.GetByID(item.DrzavaID).NazivDrzave,
+                       Drzava = uow.DrzavaRepository.GetByID(item.DrzavaID).NazivDrzave,
                         Prezime = item.Prezime,
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,

@@ -15,6 +15,12 @@ namespace PlayerWebApp.EU.Models
 
         public int Tezina { get; set; }
 
+        public string Drzava { get; set; }
+
+        public string Klub { get; set; }
+
+        public string DrzavaKluba { get; set; }
+
         public int KlubID { get; set; }
 
         public int DrzavaID { get; set; }

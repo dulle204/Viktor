@@ -23,6 +23,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Tezina)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Drzava)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Klub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrzavaKluba)
+        </th>
         <th></th>
     </tr>
 
@@ -39,6 +48,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Tezina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Drzava)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Klub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrzavaKluba)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
