@@ -30,13 +30,34 @@ namespace PlayerWebApp.EU.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage Res = await client.GetAsync("/api/players?region=EU");
 
-               if (Res.IsSuccessStatusCode)
-           {
+
+                if (Res.IsSuccessStatusCode)
+                {
                     var IgracResponse = Res.Content.ReadAsStringAsync().Result;
                     IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
                 }
-     
+
                 return View(IgracInfo);
+            }
+        }
+
+
+
+        public async Task<ActionResult> Create()
+        {
+            AddOrEditIgrac IgracInfo = new AddOrEditIgrac();
+
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                var response = client.PostAsJsonAsync("/api/Players", IgracInfo).Result;
+
+                return View(response);
             }
         }
 
@@ -48,16 +69,20 @@ namespace PlayerWebApp.EU.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Contact()
+        public async Task<ActionResult> Edit()
         {
-            using (HttpClient client = new HttpClient())
+            using (var client = new HttpClient())
             {
-                var response = await client.GetAsync(new Uri("http://localhost:59466/api/players?region=EU"));
+                AddOrEditIgrac IgracInfo = new AddOrEditIgrac();
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.PutAsJsonAsync("api/Players", IgracInfo).Result;
+
+
+
                 return View(response);
             }
-                ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
