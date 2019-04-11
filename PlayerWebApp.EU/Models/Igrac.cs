@@ -11,16 +11,12 @@ namespace PlayerWebApp.EU.Models
 
         public string Prezime { get; set; }
 
-        public int Visina { get; set; }
+        public string Visina { get; set; }
 
         public int Tezina { get; set; }
 
         public int KlubID { get; set; }
 
         public int DrzavaID { get; set; }
-
-     public Drzava Drzava { get; set; }
-
-     public Klub Klub { get; set; }
     }
 }
