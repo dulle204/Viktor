@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -43,23 +44,42 @@ namespace PlayerWebApp.EU.Controllers
 
 
 
-        public async Task<ActionResult> Create()
+        public async Task<ActionResult> Create(AddOrEditIgrac IgracInfo, bool isNewItem = false)
         {
-            AddOrEditIgrac IgracInfo = new AddOrEditIgrac();
+            
+            IgracInfo.Ime = "Test123";
+            IgracInfo.Prezime = "Prezime";
+            IgracInfo.Tezina = 100;
+            IgracInfo.Visina = 200;
+            IgracInfo.KlubId = 4;
+            IgracInfo.DrzavaId = 3;
 
             using (var client = new HttpClient())
             {
 
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+              //  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var json = JsonConvert.SerializeObject(IgracInfo);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+               // HttpResponseMessage Res = await client.PostAsJsonAsync("/api/Players", IgracInfo);
 
-                var response = client.PostAsJsonAsync("/api/Players", IgracInfo).Result;
+                if (isNewItem)
+                {
+                    var Res = await client.PostAsync("http://localhost:59466/api/Players", content);
+                }
 
-                return View(response);
+         
+
+                return View(IgracInfo);
             }
+
         }
+
+        
+
+
 
         public ActionResult About()
         {
@@ -69,15 +89,15 @@ namespace PlayerWebApp.EU.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Edit()
+        public async Task<ActionResult> Edit(Igrac IgracInfo)
         {
             using (var client = new HttpClient())
             {
-                AddOrEditIgrac IgracInfo = new AddOrEditIgrac();
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = client.PutAsJsonAsync("api/Players", IgracInfo).Result;
+   
+
+                var json = JsonConvert.SerializeObject(IgracInfo);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PutAsync("http://localhost:59466/api/Players", content);
 
 
 
