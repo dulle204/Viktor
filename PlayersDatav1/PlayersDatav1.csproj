@@ -63,6 +63,7 @@
     <Compile Include="Repositories\IgracRepository.cs" />
     <Compile Include="Repositories\KlubRepository.cs" />
     <Compile Include="Repositories\LigaRepository.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

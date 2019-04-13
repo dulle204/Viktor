@@ -11,7 +11,7 @@ using System.Data.Entity;
 namespace PlayersDatav1.UnitOfWork
 {
 
-  public  class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private PlayersContext _context = null;
         private IgracRepository _igracRepository;
