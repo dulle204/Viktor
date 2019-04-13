@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,8 +16,10 @@ namespace PlayerWebApp.EU.Models
 
         public int Tezina { get; set; }
 
+        [JsonProperty("klub_id")]
         public int KlubId { get; set; }
 
+        [JsonProperty("drzava_id")]
         public int DrzavaId { get; set; }
     }
 }
