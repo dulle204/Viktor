@@ -9,6 +9,9 @@ namespace rtest.Models
 {
     public class PlayerModel
     {
+        [JsonProperty("id")]
+        [JsonRequired]
+        public int ID { get; set; }
         [JsonProperty("ime")]
         [JsonRequired]
         [StringLength(50)]

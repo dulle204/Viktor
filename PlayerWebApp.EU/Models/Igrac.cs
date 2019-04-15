@@ -7,6 +7,8 @@ namespace PlayerWebApp.EU.Models
 {
     public class Igrac
     {
+         public int ID { get; set; }
+
         public string Ime { get; set; }
 
         public string Prezime { get; set; }
