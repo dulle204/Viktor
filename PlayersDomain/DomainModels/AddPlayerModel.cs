@@ -2,6 +2,8 @@
 {
     public class AddPlayerModel
     {
+        public int ID { get; set; }
+
         public string Ime { get; set; }
 
         public string Prezime { get; set; }

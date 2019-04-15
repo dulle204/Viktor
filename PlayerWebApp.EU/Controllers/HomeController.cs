@@ -83,41 +83,102 @@ namespace PlayerWebApp.EU.Controllers
 
             return View();
         }
-
+[HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            AddOrEditIgrac igrac= new AddOrEditIgrac();
+
+            AddOrEditIgrac igrac = new AddOrEditIgrac();
+
+        
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("/api/players?region=EU");//get igraca po id
+                client.BaseAddress = new Uri("http://localhost:59466/api/");
+                //HTTP GET
+                var responseTask = client.GetAsync("players?region=EU?id=" + id.ToString());
+                responseTask.Wait();
 
-
-                if (Res.IsSuccessStatusCode)
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
                 {
-                    var IgracResponse = Res.Content.ReadAsStringAsync().Result;
-                    //IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
-                }
+                    var readTask = result.Content.ReadAsAsync<AddOrEditIgrac>();
+                    readTask.Wait();
 
-                return View(igrac);
+                    igrac = readTask.Result;
+                }
             }
+            return View(igrac);
         }
-        public async Task<ActionResult> Edit(AddOrEditIgrac igrac)
+
+        [HttpPost]
+        public ActionResult Edit(AddOrEditIgrac igrac)
         {
+            if (!ModelState.IsValid)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
+
             using (var client = new HttpClient())
             {
 
 
-                var json = JsonConvert.SerializeObject(igrac);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PutAsync($"api/players/{3}", content);//
+                client.BaseAddress = new Uri("http://localhost:59466/api/players?region=EU");
 
+                //HTTP POST
+                var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("players?region=EU", igrac);
+                putTask.Wait();
 
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
 
-                return View(response);
+                    return RedirectToAction("Index");
+                }
             }
+            return View(igrac);
         }
     }
+
+    //  using (var client = new HttpClient())
+    //  {
+    //    client.BaseAddress = new Uri(Baseurl);
+    //  client.DefaultRequestHeaders.Clear();
+    //     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+    //   HttpResponseMessage Res = await client.GetAsync("/api/players?region=EU?id=" + id.ToString());//get igraca po id
+
+
+    //    if (Res.IsSuccessStatusCode)
+    //  {
+    //     igrac = await Res.Content.ReadAsAsync<AddOrEditIgrac>();
+
+    //IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
 }
+
+
+              //  return View(igrac);
+      //    //  }
+      //  }
+
+        // static async Task<AddOrEditIgrac> UpdateProductAsync(AddOrEditIgrac igrac)
+        //{
+        //  HttpResponseMessage response = await client.PutAsJsonAsync(
+        //    $"api/products/{igrac.ID}", igrac);
+        //response.EnsureSuccessStatusCode();
+
+        // Deserialize the updated product from the response body.
+        //igrac = await response.Content.ReadAsAsync<AddOrEditIgrac>();
+        //return igrac;
+        //}
+
+       // public async Task<ActionResult> Edit(AddOrEditIgrac igrac)
+       // {
+         //   using (var client = new HttpClient())
+         //   {
+
+
+            //    var json = JsonConvert.SerializeObject(igrac);
+             //   var content = new StringContent(json, Encoding.UTF8, "application/json");
+             //   var response = await client.PutAsync("/api/players?region=EU/{ID}", content);//
+
+
+
+             //   return View(response);
+
