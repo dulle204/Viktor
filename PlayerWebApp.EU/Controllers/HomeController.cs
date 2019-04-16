@@ -83,7 +83,7 @@ namespace PlayerWebApp.EU.Controllers
 
             return View();
         }
-[HttpGet]
+        [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
 
@@ -94,16 +94,11 @@ namespace PlayerWebApp.EU.Controllers
             {
                 client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = client.GetAsync("players?region=EU?id=" + id.ToString());
-                responseTask.Wait();
+                var responseTask = await client.GetAsync("players/" + id.ToString());
 
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
+                if (responseTask.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<AddOrEditIgrac>();
-                    readTask.Wait();
-
-                    igrac = readTask.Result;
+                    igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
                 }
             }
             return View(igrac);
