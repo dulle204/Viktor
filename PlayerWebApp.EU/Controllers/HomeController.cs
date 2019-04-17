@@ -99,7 +99,7 @@ namespace PlayerWebApp.EU.Controllers
                 {
                     client.BaseAddress = new Uri("http://localhost:59466/api/");
                     //HTTP GET
-                    var responseTask = await client.GetAsync("Players/" + id.ToString());
+                    var responseTask = await client.GetAsync("Igracs/" + id.ToString());
 
                     if (responseTask.IsSuccessStatusCode)
                     {
