@@ -9,6 +9,7 @@ namespace PlayersDomain
 
         List<IgracDomainModel> GetPlayers();
         void AddPlayer(AddPlayerModel igrac);
+        
         void UpdatePlayer(int id, AddPlayerModel igrac);
     }
 }

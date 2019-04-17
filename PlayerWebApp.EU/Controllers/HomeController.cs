@@ -88,7 +88,7 @@ namespace PlayerWebApp.EU.Controllers
         public async Task<ActionResult> Edit(int id)
         {
 
-            AddOrEditIgrac igrac = null;
+            AddOrEditIgrac igrac = new AddOrEditIgrac();
 
            
         
@@ -99,11 +99,13 @@ namespace PlayerWebApp.EU.Controllers
                 {
                     client.BaseAddress = new Uri("http://localhost:59466/api/");
                     //HTTP GET
-                    var responseTask = await client.GetAsync("players/" + id.ToString());
+                    var responseTask = await client.GetAsync("Players/" + id.ToString());
 
                     if (responseTask.IsSuccessStatusCode)
                     {
-                        igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
+                    var IgracResponse = responseTask.Content.ReadAsStringAsync().Result;
+                    igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
+                 //   igrac = await responseTask.Content.ReadAsAsync<Igrac>();
                     }
             }
             return View(igrac);
@@ -119,10 +121,10 @@ namespace PlayerWebApp.EU.Controllers
             {
 
 
-                client.BaseAddress = new Uri("http://localhost:59466/api/players");
+                client.BaseAddress = new Uri("http://localhost:59466/api/Igracs");
 
                 //HTTP POST
-                var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("Players", igrac);
+                var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("Igracs", igrac);
                 putTask.Wait();
 
                 var result = putTask.Result;

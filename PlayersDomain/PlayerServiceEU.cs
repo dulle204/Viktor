@@ -47,6 +47,22 @@ namespace PlayersDomain
             return list;
         }
 
+
+
+        public IgracDomainModel GetPlayersID(int ID)
+        {
+            IgracDomainModel igrac = new IgracDomainModel();
+
+            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            {
+                var igraci = uow.IgracRepository.GetByID(ID);
+               
+            }
+
+
+            return igrac;
+        }
+
         public void AddPlayer(AddPlayerModel igrac)
         {
             using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
