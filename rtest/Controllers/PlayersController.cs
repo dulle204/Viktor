@@ -32,7 +32,17 @@ namespace rtest.Controllers
             return data;
         }
 
-  
+        public IgracDomainModel GetID(int id,string region)
+        {
+            IPlayerService service = _factory.GetInstance(region);
+            var data = service.GetPlayersByID(id);
+           
+
+            return data;
+
+        }
+
+
 
         [ResponseType(typeof(Igrac))]
         public IHttpActionResult PostIgrace([FromBody]PlayerModel igrac, [FromUri]string region)

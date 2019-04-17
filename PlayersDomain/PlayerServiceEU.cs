@@ -49,19 +49,42 @@ namespace PlayersDomain
 
 
 
-        public IgracDomainModel GetPlayersID(int ID)
+        public IgracDomainModel GetPlayersByID(int id)
         {
             IgracDomainModel igrac = new IgracDomainModel();
 
             using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             {
-                var igraci = uow.IgracRepository.GetByID(ID);
-               
+                var igracg = uow.IgracRepository.Get(x => x.ID == id).FirstOrDefault();
+                IgracDomainModel model = null;
+
+                {
+                    var klub = uow.KlubRepository.GetByID(igracg.KlubID);
+                    var liga = uow.LigaRepository.GetByID(klub.LigaID);
+
+                    model = new IgracDomainModel()
+                    {
+                        ID = igracg.ID,
+                        Ime = igracg.Ime,
+                        Drzava = uow.DrzavaRepository.GetByID(igracg.DrzavaID).NazivDrzave,
+                        Prezime = igracg.Prezime,
+                        Klub = klub.NazivKluba,
+                        DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
+                        Tezina = igracg.Tezina,
+                        Visina = igracg.Visina.ToString()
+                    };
+
+
+                }
             }
 
 
             return igrac;
         }
+
+
+
+
 
         public void AddPlayer(AddPlayerModel igrac)
         {
