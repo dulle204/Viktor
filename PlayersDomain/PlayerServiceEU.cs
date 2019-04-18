@@ -64,6 +64,7 @@ namespace PlayersDomain
 
                     model = new IgracDomainModel()
                     {
+                       
                         ID = igracg.ID,
                         Ime = igracg.Ime,
                         Drzava = uow.DrzavaRepository.GetByID(igracg.DrzavaID).NazivDrzave,
@@ -71,15 +72,20 @@ namespace PlayersDomain
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = igracg.Tezina,
-                        Visina = igracg.Visina.ToString()
+                        Visina = igracg.Visina.ToString(),
+                        KlubId=igracg.KlubID,
+                        DrzavaId=igracg.DrzavaID
+                        
+                        
                     };
 
+                    return model;
 
                 }
             }
 
 
-            return igrac;
+         
         }
 
 

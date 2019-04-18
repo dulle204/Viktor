@@ -36,7 +36,6 @@ namespace rtest.Controllers
         {
             IPlayerService service = _factory.GetInstance(region);
             var data = service.GetPlayersByID(id);
-           
 
             return data;
 
