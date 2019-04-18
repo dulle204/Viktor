@@ -98,8 +98,8 @@ namespace PlayerWebApp.EU.Controllers
                 
                 {
                     client.BaseAddress = new Uri("http://localhost:59466/api/");
-                    //HTTP GET
-                    var responseTask = await client.GetAsync("players/{id}?region=EU/"); // promenuo u Igracs a treba PLayers  kod igracs vuce samo ime bez kluba
+                //HTTP GET
+                var responseTask = await client.GetAsync("players/{id}?region=EU/"); 
 
                     if (responseTask.IsSuccessStatusCode)
                     {
@@ -124,7 +124,7 @@ namespace PlayerWebApp.EU.Controllers
                 client.BaseAddress = new Uri("http://localhost:59466/api/Igracs");
 
                 //HTTP POST
-                var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("Igracs", igrac);
+                var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("Players", igrac);
                 putTask.Wait();
 
                 var result = putTask.Result;
