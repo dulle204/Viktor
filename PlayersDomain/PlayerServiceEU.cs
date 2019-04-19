@@ -36,7 +36,9 @@ namespace PlayersDomain
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = item.Tezina,
-                        Visina = item.Visina.ToString()
+                        Visina = item.Visina.ToString(),
+                        KlubId=item.KlubID,
+                        DrzavaId=item.DrzavaID
                     };
 
                     list.Add(model);

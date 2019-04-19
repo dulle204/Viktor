@@ -99,13 +99,13 @@ namespace PlayerWebApp.EU.Controllers
                 {
                     client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = await client.GetAsync("players/{id}?region=EU/"); 
+                var responseTask = await client.GetAsync("players/" +id.ToString() + "?region=EU"); 
 
                     if (responseTask.IsSuccessStatusCode)
                     {
-                    var IgracResponse = responseTask.Content.ReadAsStringAsync().Result;
-                    igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
-                 //   igrac = await responseTask.Content.ReadAsAsync<Igrac>();
+                   // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
+                   // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
+                    igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
                     }
             }
             return View(igrac);
@@ -121,7 +121,7 @@ namespace PlayerWebApp.EU.Controllers
             {
 
 
-                client.BaseAddress = new Uri("http://localhost:59466/api/Igracs");
+                client.BaseAddress = new Uri("http://localhost:59466/api/Players");
 
                 //HTTP POST
                 var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("Players", igrac);
