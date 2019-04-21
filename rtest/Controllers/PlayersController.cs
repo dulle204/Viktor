@@ -11,6 +11,7 @@ using PlayersDatav1.UnitOfWork;
 using System.Web.Http.Description;
 using rtest.Models;
 using PlayersDomain.DomainModels;
+using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
 
 namespace rtest.Controllers
 {
@@ -85,6 +86,16 @@ namespace rtest.Controllers
                 KlubId = igrac.KlubId
             };
             service.UpdatePlayer(id, player);
+
+            return StatusCode(HttpStatusCode.Accepted);
+        }
+        
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            IPlayerService service = _factory.GetInstance("EU");
+            service.DeletePlayer(id);
+
 
             return StatusCode(HttpStatusCode.Accepted);
         }

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-
 using PlayerWebApp.EU.Models;
 using System;
 using System.Collections.Generic;
@@ -90,51 +89,99 @@ namespace PlayerWebApp.EU.Controllers
 
             AddOrEditIgrac igrac = new AddOrEditIgrac();
 
-           
-        
+            List<SelectListItem> clubs = new List<SelectListItem>();
+            clubs.Add(new SelectListItem { Text = "Partizan", Value = "2" });
+            clubs.Add(new SelectListItem { Text = "CZV", Value = "3" });
+            ViewBag.Clubs = clubs;
+
             using (var client = new HttpClient())
-            
-
-                
-                {
-                    client.BaseAddress = new Uri("http://localhost:59466/api/");
+            {
+                client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = await client.GetAsync("players/" +id.ToString() + "?region=EU"); 
+                var responseTask = await client.GetAsync("players/" + id.ToString() + "?region=EU");
 
-                    if (responseTask.IsSuccessStatusCode)
-                    {
-                   // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
-                   // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
+                if (responseTask.IsSuccessStatusCode)
+                {
+                    // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
+                    // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
                     igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
-                    }
+                }
             }
             return View(igrac);
         }
 
         [HttpPost]
-        public ActionResult Edit(AddOrEditIgrac igrac)
+        public async Task<ActionResult> Edit(AddOrEditIgrac igrac)
         {
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
+
+            
 
             using (var client = new HttpClient())
             {
 
 
-                client.BaseAddress = new Uri("http://localhost:59466/api/Players");
-
+                client.BaseAddress = new Uri($"http://localhost:59466/api/Players/");
+                var json = JsonConvert.SerializeObject(igrac);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
                 //HTTP POST
-                var putTask = client.PutAsJsonAsync<AddOrEditIgrac>("Players", igrac);
-                putTask.Wait();
-
-                var result = putTask.Result;
-                if (result.IsSuccessStatusCode)
+                var result = await client.PutAsync(igrac.ID.ToString(), content);
+                if (!result.IsSuccessStatusCode)
                 {
-
-                    return RedirectToAction("Index");
+                    return new HttpStatusCodeResult(result.StatusCode, result.Content.ToString());
                 }
             }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<ActionResult> Delete(int? ID)
+        {
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Igrac igrac = new Igrac();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:59466/api/");
+                //HTTP GET
+                var responseTask = await client.GetAsync("players/" + ID.ToString() + "?region=EU");
+
+                if (responseTask.IsSuccessStatusCode)
+                {
+                    // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
+                    // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
+                    igrac = await responseTask.Content.ReadAsAsync<Igrac>();
+                }
+            }
+
+            if (igrac == null)
+            {
+                return HttpNotFound();
+            }
             return View(igrac);
+        }
+
+        // POST: Albums/Delete/5
+        [HttpPost, ActionName(nameof(Delete))]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:59466/api/");
+                //HTTP GET
+                var responseTask = await client.DeleteAsync("players/" + id.ToString());
+
+                if (!responseTask.IsSuccessStatusCode)
+                {
+                    return new HttpStatusCodeResult(responseTask.StatusCode, responseTask.Content.ToString());
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 
@@ -155,32 +202,32 @@ namespace PlayerWebApp.EU.Controllers
 }
 
 
-              //  return View(igrac);
-      //    //  }
-      //  }
+//  return View(igrac);
+//    //  }
+//  }
 
-        // static async Task<AddOrEditIgrac> UpdateProductAsync(AddOrEditIgrac igrac)
-        //{
-        //  HttpResponseMessage response = await client.PutAsJsonAsync(
-        //    $"api/products/{igrac.ID}", igrac);
-        //response.EnsureSuccessStatusCode();
+// static async Task<AddOrEditIgrac> UpdateProductAsync(AddOrEditIgrac igrac)
+//{
+//  HttpResponseMessage response = await client.PutAsJsonAsync(
+//    $"api/products/{igrac.ID}", igrac);
+//response.EnsureSuccessStatusCode();
 
-        // Deserialize the updated product from the response body.
-        //igrac = await response.Content.ReadAsAsync<AddOrEditIgrac>();
-        //return igrac;
-        //}
+// Deserialize the updated product from the response body.
+//igrac = await response.Content.ReadAsAsync<AddOrEditIgrac>();
+//return igrac;
+//}
 
-       // public async Task<ActionResult> Edit(AddOrEditIgrac igrac)
-       // {
-         //   using (var client = new HttpClient())
-         //   {
-
-
-            //    var json = JsonConvert.SerializeObject(igrac);
-             //   var content = new StringContent(json, Encoding.UTF8, "application/json");
-             //   var response = await client.PutAsync("/api/players?region=EU/{ID}", content);//
+// public async Task<ActionResult> Edit(AddOrEditIgrac igrac)
+// {
+//   using (var client = new HttpClient())
+//   {
 
 
+//    var json = JsonConvert.SerializeObject(igrac);
+//   var content = new StringContent(json, Encoding.UTF8, "application/json");
+//   var response = await client.PutAsync("/api/players?region=EU/{ID}", content);//
 
-             //   return View(response);
+
+
+//   return View(response);
 

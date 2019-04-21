@@ -17,6 +17,11 @@ namespace PlayersDomain
             throw new NotImplementedException();
         }
 
+        public void DeletePlayer(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<IgracDomainModel> GetPlayers()
         {
             List<IgracDomainModel> list = new List<IgracDomainModel>();
@@ -74,8 +79,6 @@ namespace PlayersDomain
                         Tezina = igracg.Tezina,
                         Visina = igracg.Visina.ToString()
                     };
-
-
                 }
             }
 

@@ -31,14 +31,14 @@ namespace PlayersDomain
                     {
                         ID = item.ID,
                         Ime = item.Ime,
-                       Drzava = uow.DrzavaRepository.GetByID(item.DrzavaID).NazivDrzave,
+                        Drzava = uow.DrzavaRepository.GetByID(item.DrzavaID).NazivDrzave,
                         Prezime = item.Prezime,
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = item.Tezina,
                         Visina = item.Visina.ToString(),
-                        KlubId=item.KlubID,
-                        DrzavaId=item.DrzavaID
+                        KlubId = item.KlubID,
+                        DrzavaId = item.DrzavaID
                     };
 
                     list.Add(model);
@@ -66,7 +66,6 @@ namespace PlayersDomain
 
                     model = new IgracDomainModel()
                     {
-                       
                         ID = igracg.ID,
                         Ime = igracg.Ime,
                         Drzava = uow.DrzavaRepository.GetByID(igracg.DrzavaID).NazivDrzave,
@@ -75,24 +74,15 @@ namespace PlayersDomain
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = igracg.Tezina,
                         Visina = igracg.Visina.ToString(),
-                        KlubId=igracg.KlubID,
-                        DrzavaId=igracg.DrzavaID
-                        
-                        
+                        KlubId = igracg.KlubID,
+                        DrzavaId = igracg.DrzavaID
                     };
 
                     return model;
 
                 }
             }
-
-
-         
         }
-
-
-
-
 
         public void AddPlayer(AddPlayerModel igrac)
         {
@@ -125,6 +115,15 @@ namespace PlayersDomain
                 izmenjenIgrac.KlubID = igrac.KlubId;
 
                 uow.IgracRepository.Update(izmenjenIgrac);
+                uow.Save();
+            }
+        }
+
+        public void DeletePlayer(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
+            {
+                uow.IgracRepository.Delete(id);
                 uow.Save();
             }
         }

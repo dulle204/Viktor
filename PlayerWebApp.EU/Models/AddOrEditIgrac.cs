@@ -18,7 +18,7 @@ namespace PlayerWebApp.EU.Models
 
         public int Tezina { get; set; }
 
-        [JsonProperty("klub_id")]
+        //[JsonProperty("klub_id")]
         public int KlubId { get; set; }
 
         [JsonProperty("drzava_id")]
