@@ -43,6 +43,26 @@ namespace PlayerWebApp.EU.Controllers
         }
 
 
+        public async Task<ActionResult> Details(int id)
+        {
+            AddOrEditIgrac igrac = new AddOrEditIgrac();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:59466/api/");
+                //HTTP GET
+                var responseTask = await client.GetAsync("players/" + id.ToString() + "?region=EU");
+
+                if (responseTask.IsSuccessStatusCode)
+                {
+                    // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
+                    // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
+                    igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
+                }
+            }
+            return View(igrac);
+        }
+
+
         [HttpGet]
         public async Task<ActionResult> Create()
         {

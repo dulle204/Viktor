@@ -21,9 +21,12 @@ namespace PlayerWebApp.EU.Models
         //[JsonProperty("klub_id")]
         public int KlubId { get; set; }
 
-        [JsonProperty("drzava_id")]
+     //   [JsonProperty("drzava_id")]
         public int DrzavaId { get; set; }
 
         public string Klub { get; set; }
+        public string Drzava { get; set; }
+        public string DrzavaKluba { get; set; }
+
     }
 }
