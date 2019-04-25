@@ -12,6 +12,8 @@ using System.Web.Mvc;
 
 
 
+
+
 namespace PlayerWebApp.EU.Controllers
 {
     public class HomeController : Controller
@@ -107,12 +109,13 @@ namespace PlayerWebApp.EU.Controllers
         public async Task<ActionResult> Edit(int id)
         {
 
+
             AddOrEditIgrac igrac = new AddOrEditIgrac();
 
             List<SelectListItem> clubs = new List<SelectListItem>();
-            clubs.Add(new SelectListItem { Text = "Partizan", Value = "2" });
-            clubs.Add(new SelectListItem { Text = "CZV", Value = "3" });
-            ViewBag.Clubs = clubs;
+            clubs.Add(new SelectListItem { Text = "Partizan", Value = "3" });
+            clubs.Add(new SelectListItem { Text = "CZV", Value = "4" });
+                 ViewBag.Clubs = clubs;
 
             using (var client = new HttpClient())
             {

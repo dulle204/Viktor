@@ -9,6 +9,7 @@ namespace PlayersDomain
 
         List<IgracDomainModel> GetPlayers();
         IgracDomainModel GetPlayersByID(int id);
+        
         void AddPlayer(AddPlayerModel igrac);
         void UpdatePlayer(int id, AddPlayerModel igrac);
         void DeletePlayer(int id);
