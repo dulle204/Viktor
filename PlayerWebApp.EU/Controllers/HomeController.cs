@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using PlayersDatav1.UnitOfWork;
+
 
 
 
@@ -105,12 +107,14 @@ namespace PlayerWebApp.EU.Controllers
             return View();
         }
 
+
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
 
 
             AddOrEditIgrac igrac = new AddOrEditIgrac();
+
 
             List<SelectListItem> clubs = new List<SelectListItem>();
             clubs.Add(new SelectListItem { Text = "Partizan", Value = "3" });
