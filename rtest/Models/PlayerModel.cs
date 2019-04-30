@@ -26,7 +26,7 @@ namespace rtest.Models
         [JsonProperty("tezina")]
         public int  Tezina{ get; set; }
 
-        //[JsonProperty("klub_id")]
+        [JsonProperty("klub_id")]
         public int KlubId { get; set; }
 
         [JsonProperty("drzava_id")]

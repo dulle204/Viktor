@@ -8,7 +8,7 @@ namespace PlayersDatav1
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class PlayersContext : DbContext,IPlayersContext
+    public partial class PlayersContext : DbContext, IPlayersContext
     {
         public PlayersContext()
             : base("name=PlayersContext")

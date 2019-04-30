@@ -15,31 +15,30 @@ namespace PlayerWebApp.EU.Controllers
     {
         // GET: Players
 
+
+        //Hosted web API REST Service base url  
+        private const string Baseurl = "http://localhost:59466";
+
+        public async Task<ActionResult> Index()
         {
+            List<Igrac> IgracInfo = new List<Igrac>();
 
-            //Hosted web API REST Service base url  
-            private const string Baseurl = "http://localhost:59466";
-
-            public async Task<ActionResult> Index()
+            using (var client = new HttpClient())
             {
-                List<Igrac> IgracInfo = new List<Igrac>();
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("/api/players?region=EU");
 
-                using (var client = new HttpClient())
+
+                if (Res.IsSuccessStatusCode)
                 {
-                    client.BaseAddress = new Uri(Baseurl);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("/api/players?region=EU");
-
-
-                    if (Res.IsSuccessStatusCode)
-                    {
-                        var IgracResponse = Res.Content.ReadAsStringAsync().Result;
-                        IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
-                    }
-
-                    return View(IgracInfo);
+                    var IgracResponse = Res.Content.ReadAsStringAsync().Result;
+                    IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
                 }
+
+                return View(IgracInfo);
             }
         }
     }
+}

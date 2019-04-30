@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using PlayersDatav1.UnitOfWork;
-
 
 
 
@@ -20,7 +18,7 @@ namespace PlayerWebApp.EU.Controllers
 {
     public class HomeController : Controller
     {
-
+        
         //Hosted web API REST Service base url  
         private const string Baseurl = "http://localhost:59466";
 
@@ -113,16 +111,8 @@ namespace PlayerWebApp.EU.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-
-
             AddOrEditIgrac igrac = new AddOrEditIgrac();
             List<Klub> KlubInfo = new List<Klub>();
-
-
-           // List<SelectListItem> clubs = new List<SelectListItem>();
-           // clubs.Add(new SelectListItem { Text = "Partizan", Value = "3" });
-          //  clubs.Add(new SelectListItem { Text = "CZV", Value = "4" });
-               //  ViewBag.Clubs = KlubInfo;
 
             using (var client = new HttpClient())
             {
@@ -136,18 +126,22 @@ namespace PlayerWebApp.EU.Controllers
                     // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
                     igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
                 }
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("/api/Klub?region=EU");
 
+                HttpResponseMessage Res = await client.GetAsync("/api/Klub?region=EU");
 
                 if (Res.IsSuccessStatusCode)
                 {
                     var IgracResponse = Res.Content.ReadAsStringAsync().Result;
                     KlubInfo = JsonConvert.DeserializeObject<List<Klub>>(IgracResponse);
                 }
-                ViewBag.Clubs = KlubInfo;
+
+                List<SelectListItem> clubList = new List<SelectListItem>();
+                foreach (var item in KlubInfo)
+                {
+                    clubList.Add(new SelectListItem { Text = item.NazivKluba, Value = item.ID.ToString() });
+                }
+
+                ViewBag.Clubs = clubList;
 
             }
             return View(igrac);
@@ -159,12 +153,8 @@ namespace PlayerWebApp.EU.Controllers
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
 
-            
-
             using (var client = new HttpClient())
             {
-
-
                 client.BaseAddress = new Uri($"http://localhost:59466/api/Players/");
                 var json = JsonConvert.SerializeObject(igrac);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
