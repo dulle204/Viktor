@@ -42,6 +42,8 @@ namespace PlayerWebApp.EU.Controllers
                     IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
                 }
 
+
+
                 return View(IgracInfo);
             }
         }
@@ -114,12 +116,13 @@ namespace PlayerWebApp.EU.Controllers
 
 
             AddOrEditIgrac igrac = new AddOrEditIgrac();
+            List<Klub> KlubInfo = new List<Klub>();
 
 
-            List<SelectListItem> clubs = new List<SelectListItem>();
-            clubs.Add(new SelectListItem { Text = "Partizan", Value = "3" });
-            clubs.Add(new SelectListItem { Text = "CZV", Value = "4" });
-                 ViewBag.Clubs = clubs;
+           // List<SelectListItem> clubs = new List<SelectListItem>();
+           // clubs.Add(new SelectListItem { Text = "Partizan", Value = "3" });
+          //  clubs.Add(new SelectListItem { Text = "CZV", Value = "4" });
+               //  ViewBag.Clubs = KlubInfo;
 
             using (var client = new HttpClient())
             {
@@ -133,6 +136,19 @@ namespace PlayerWebApp.EU.Controllers
                     // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
                     igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
                 }
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("/api/Klub?region=EU");
+
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var IgracResponse = Res.Content.ReadAsStringAsync().Result;
+                    KlubInfo = JsonConvert.DeserializeObject<List<Klub>>(IgracResponse);
+                }
+                ViewBag.Clubs = KlubInfo;
+
             }
             return View(igrac);
         }
