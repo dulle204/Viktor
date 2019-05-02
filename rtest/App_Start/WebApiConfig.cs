@@ -14,6 +14,8 @@ namespace rtest
         {
             var container = new UnityContainer();
             container.RegisterType<IFactory, Factory>();
+           
+            container.RegisterType<IKlubFactory, KlubFactory>();
 
             // Web API configuration and services
             config.DependencyResolver = new UnityResolver(container);

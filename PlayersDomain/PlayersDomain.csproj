@@ -48,8 +48,10 @@
     <Compile Include="DomainModels\LigaDomianModel.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IFactory.cs" />
+    <Compile Include="IKlubFactory.cs" />
     <Compile Include="IKlubService.cs" />
     <Compile Include="IPlayerService.cs" />
+    <Compile Include="KlubFactory.cs" />
     <Compile Include="KlubServiceEU.cs" />
     <Compile Include="PlayerServiceEU.cs" />
     <Compile Include="PlayerServiceUS.cs" />

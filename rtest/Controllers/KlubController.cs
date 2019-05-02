@@ -12,9 +12,9 @@ namespace rtest.Controllers
 {
     public class KlubController : ApiController
     {
-        private readonly IFactory _factory;
+        private readonly IKlubFactory _factory;
 
-        public KlubController(IFactory factory)
+        public KlubController(IKlubFactory factory)
         {
             _factory = factory;
             //_factory = new Factory();

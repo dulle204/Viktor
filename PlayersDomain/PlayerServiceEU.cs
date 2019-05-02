@@ -36,7 +36,7 @@ namespace PlayersDomain
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = item.Tezina,
-                        Visina = item.Visina.ToString(),
+                        Visina = item.Visina,
                         KlubId = item.KlubID,
                         DrzavaId = item.DrzavaID
                     };
@@ -73,7 +73,7 @@ namespace PlayersDomain
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = igracg.Tezina,
-                        Visina = igracg.Visina.ToString(),
+                        Visina = igracg.Visina,
                         KlubId = igracg.KlubID,
                         DrzavaId = igracg.DrzavaID
                     };

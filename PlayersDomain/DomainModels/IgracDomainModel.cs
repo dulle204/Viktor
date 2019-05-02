@@ -8,7 +8,7 @@
 
         public string Prezime { get; set; }
 
-        public string Visina { get; set; }
+        public int Visina { get; set; }
 
         public int Tezina { get; set; }
 

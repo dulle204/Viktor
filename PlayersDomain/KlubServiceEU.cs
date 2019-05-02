@@ -11,10 +11,10 @@ namespace PlayersDomain
     {
         private readonly IUnitOfWork _uow;
 
-        public KlubServiceEU(IUnitOfWork uow)
-        {
-            _uow = uow;
-        }
+    //    public KlubServiceEU(IUnitOfWork uow)
+     //   {
+     //       _uow = uow;
+   //     }
 
         public string Region { get; } = "EU";
 

@@ -45,7 +45,7 @@ namespace PlayersDomain
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = Convert.ToInt32(item.Tezina / 0.45),
-                        Visina = $"{feet}' {inches}\""
+                      //  Visina = $"{feet}' {inches}\""
                     };
 
                     list.Add(model);
@@ -77,7 +77,7 @@ namespace PlayersDomain
                         Klub = klub.NazivKluba,
                         DrzavaKLuba = uow.DrzavaRepository.GetByID(liga.DrzavaID).NazivDrzave,
                         Tezina = igracg.Tezina,
-                        Visina = igracg.Visina.ToString()
+                        Visina = igracg.Visina
                     };
                 }
             }
