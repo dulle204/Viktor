@@ -13,5 +13,6 @@ namespace PlayersDomain
         void AddPlayer(AddPlayerModel igrac);
         void UpdatePlayer(int id, AddPlayerModel igrac);
         void DeletePlayer(int id);
+        
     }
 }

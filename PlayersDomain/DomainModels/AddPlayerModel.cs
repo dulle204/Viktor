@@ -15,5 +15,11 @@
         public int KlubId { get; set; }
 
         public int DrzavaId { get; set; }
+
+        public string Drzava { get; set; }
+
+        public string Klub { get; set; }
+
+        public string DrzavaKLuba { get; set; }
     }
 }

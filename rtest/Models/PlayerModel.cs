@@ -31,5 +31,11 @@ namespace rtest.Models
 
         [JsonProperty("drzava_id")]
         public int DrzavaId { get; set; }
+
+        public string Klub { get; set; }
+
+        public string Drzava { get; set; }
+
+        public string DrzavaKluba { get; set; }
     }
 }

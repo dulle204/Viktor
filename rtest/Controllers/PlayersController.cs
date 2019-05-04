@@ -25,20 +25,58 @@ namespace rtest.Controllers
             //_factory = new Factory();
         }
 
-        public IEnumerable<IgracDomainModel> Get(string region)
+        public IEnumerable<PlayerModel> Get(string region)
         {
             IPlayerService service = _factory.GetInstance(region);
-            var data = service.GetPlayers();
+            List<PlayerModel> list = new List<PlayerModel>();
+            PlayerModel model = null;
 
-            return data;
+            var data = service.GetPlayers();
+            foreach (var item in data)
+            {
+
+                model = new PlayerModel()
+                {
+                    ID = item.ID,
+                    Ime = item.Ime,
+                    Prezime = item.Prezime,
+                    Tezina = item.Tezina,
+                    Visina = item.Visina,
+                    Drzava = item.Drzava,
+                    Klub = item.Klub,
+                    KlubId = item.KlubId,
+                    DrzavaId = item.DrzavaId,
+                    DrzavaKluba = item.DrzavaKLuba
+                };
+                list.Add(model);
+            }
+
+             return list;
         }
 
-        public IgracDomainModel GetID(int id,string region)
+        public PlayerModel GetID(int id,string region)
         {
             IPlayerService service = _factory.GetInstance(region);
+           
             var data = service.GetPlayersByID(id);
+            PlayerModel model = new PlayerModel()
+            {
+                ID=data.ID,
+                Ime=data.Ime,
+                Prezime=data.Prezime,
+                Tezina=data.Tezina,
+                Visina=data.Visina,
+                Drzava=data.Drzava,
+                Klub=data.Klub,
+                DrzavaKluba=data.DrzavaKLuba,
+                KlubId=data.KlubId,
+                DrzavaId=data.KlubId
 
-            return data;
+
+            };
+
+
+            return model;
 
         }
 

@@ -8,6 +8,6 @@ namespace PlayersDomain
 {
      public interface IKlubFactory
     {
-        IKlubService GetInst(string par);
+
     }
 }

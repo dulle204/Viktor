@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PlayersDomain
 {
-    public interface IKlubService
+    public  interface IKlubService
     {
 
-        string Region { get; }
+
 
         List<KlubDomainModel> GetKlubs();
     }

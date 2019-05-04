@@ -12,18 +12,18 @@ namespace rtest.Controllers
 {
     public class KlubController : ApiController
     {
-        private readonly IKlubFactory _factory;
+        private readonly IKlubService _klub;
 
-        public KlubController(IKlubFactory factory)
+        public KlubController(IKlubService klub)
         {
-            _factory = factory;
+            _klub = klub;
             //_factory = new Factory();
         }
 
-        public IEnumerable<KlubDomainModel> Get(string region)
+        public IEnumerable<KlubDomainModel> Get()
         {
-            IKlubService service = _factory.GetInst(region);
-            var data = service.GetKlubs();
+           
+            var data = _klub.GetKlubs();
 
             return data;
         }

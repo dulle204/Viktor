@@ -22,10 +22,6 @@ namespace PlayersDomain
 
         }
 
-        public IKlubService GetInst(string par)
-        {
-            var instance = Ins.FirstOrDefault(x => x.Region == par);
-            return instance;
-        }
+
     }
 }
