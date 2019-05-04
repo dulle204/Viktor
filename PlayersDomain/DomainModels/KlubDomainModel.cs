@@ -9,5 +9,7 @@
         public string Liga { get; set; }
 
         public string Drzava { get; set; }
+
+        public int LigaID { get; set; }
     }
 }

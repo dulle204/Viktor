@@ -20,12 +20,27 @@ namespace rtest.Controllers
             //_factory = new Factory();
         }
 
-        public IEnumerable<KlubDomainModel> Get()
+        public IEnumerable<KlubModel> Get()
         {
-           
-            var data = _klub.GetKlubs();
+            List<KlubModel> list = new List<KlubModel>();
+           KlubModel model = null;
 
-            return data;
+            var data = _klub.GetKlubs();
+            foreach (var item in data)
+            {
+                model = new KlubModel
+                {
+                    ID = item.ID,
+                  NazivKluba = item.NazivKluba,
+                  Liga=item.Liga,
+                  Drzava=item.Drzava,
+                 LigaID = item.LigaID
+
+                };
+                list.Add(model);
+            }
+
+            return list;
         }
       
 

@@ -11,39 +11,35 @@ namespace PlayersDomain
     {
         private readonly IUnitOfWork _uow;
 
-    //    public KlubServiceEU(IUnitOfWork uow)
-    // {
-       //  _uow = uow;
-   //  }
-
-        public string Region { get; } = "EU";
+       public KlubServiceEU(IUnitOfWork uow)
+       {
+        _uow = uow;
+      }
 
         public List<KlubDomainModel> GetKlubs()
         {
             List<KlubDomainModel> list = new List<KlubDomainModel>();
 
-            using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
-            {
-                var klubovi = uow.KlubRepository.Get();
+           // using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            //{
+                var klubovi = _uow.KlubRepository.Get();
                 KlubDomainModel model = null;
                 foreach (var item in klubovi)
                 {
                     
-                    var liga = uow.LigaRepository.GetByID(item.LigaID);
+                    var liga = _uow.LigaRepository.GetByID(item.LigaID);
 
                     model = new KlubDomainModel()
                     {
                         ID = item.ID,
                         NazivKluba = item.NazivKluba,
-                        Liga=uow.LigaRepository.GetByID(item.LigaID).NazivLige
-                   
+                        Liga=_uow.LigaRepository.GetByID(item.LigaID).NazivLige
+
 
                     };
 
                     list.Add(model);
                 }
-            }
-
 
             return list;
         }
