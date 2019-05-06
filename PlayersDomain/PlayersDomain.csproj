@@ -46,11 +46,14 @@
     <Compile Include="DomainModels\IgracDomainModel.cs" />
     <Compile Include="DomainModels\KlubDomainModel.cs" />
     <Compile Include="DomainModels\LigaDomianModel.cs" />
+    <Compile Include="DrzavaService.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="IDrazavaService.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IKlubService.cs" />
     <Compile Include="IPlayerService.cs" />
     <Compile Include="KlubServiceEU.cs" />
+    <Compile Include="LigaService.cs" />
     <Compile Include="PlayerServiceEU.cs" />
     <Compile Include="PlayerServiceUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

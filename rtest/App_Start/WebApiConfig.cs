@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Unity;
+using PlayersDatav1.UnitOfWork;
 
 namespace rtest
 {
@@ -15,8 +16,10 @@ namespace rtest
             var container = new UnityContainer();
             container.RegisterType<IFactory, Factory>();
             container.RegisterType<IKlubService, KlubServiceEU>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IDrazavaService, DrzavaService>();
            
-          //  container.RegisterType<KlubServiceEU, IKlubService>();
+          // container.RegisterType<KlubServiceEU, IKlubService>();
 
             // Web API configuration and services
             config.DependencyResolver = new UnityResolver(container);

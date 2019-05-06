@@ -25,7 +25,7 @@ namespace PlayerWebApp.EU.Controllers
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("/api/Klub?region=EU");
+                HttpResponseMessage Res = await client.GetAsync("/api/Klub");
 
 
                 if (Res.IsSuccessStatusCode)

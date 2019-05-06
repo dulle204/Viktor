@@ -144,6 +144,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DrzavaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlubController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -238,10 +239,19 @@
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Klub\Index.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Delete.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\Drzava\Index.cshtml" />
+    <Content Include="Views\Drzava\Details.cshtml" />
+    <Content Include="Views\Drzava\Create.cshtml" />
+    <Content Include="Views\Drzava\Edit.cshtml" />
+    <Content Include="Views\Drzava\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Players\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -13,50 +13,44 @@ using System.Web.Mvc;
 
 namespace PlayerWebApp.EU.Controllers
 {
-    public class PlayersController : Controller
+    public class DrzavaController : Controller
     {
-        // GET: Players
-
-
-        //Hosted web API REST Service base url  
         private const string Baseurl = "http://localhost:59466";
 
         public async Task<ActionResult> Index()
         {
-            List<Igrac> IgracInfo = new List<Igrac>();
+            List<Drzava> DrzavaInfo = new List<Drzava>();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("/api/players?region=EU");
+                HttpResponseMessage Res = await client.GetAsync("/api/Drzava");
 
 
                 if (Res.IsSuccessStatusCode)
                 {
                     var IgracResponse = Res.Content.ReadAsStringAsync().Result;
-                    IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
+                    DrzavaInfo = JsonConvert.DeserializeObject<List<Drzava>>(IgracResponse);
                 }
 
-                return View(IgracInfo);
+                return View(DrzavaInfo);
             }
         }
 
         public async Task<ActionResult> Details(int id)
         {
-            AddOrEditIgrac igrac = new AddOrEditIgrac();
+            Drzava igrac = new Drzava();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = await client.GetAsync("players/" + id.ToString() + "?region=EU");
+                var responseTask = await client.GetAsync("Drzava/" + id.ToString());
 
                 if (responseTask.IsSuccessStatusCode)
                 {
-                    // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
-                    // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
-                    igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
+                    igrac = await responseTask.Content.ReadAsAsync<Drzava>();
                 }
             }
             return View(igrac);
@@ -66,13 +60,13 @@ namespace PlayerWebApp.EU.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            AddOrEditIgrac igracInfo = new AddOrEditIgrac();
+            Drzava drzavaInfo = new Drzava();
 
-            return View(igracInfo);
+            return View(drzavaInfo);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(AddOrEditIgrac noviIgrac)
+        public async Task<ActionResult> Create(Drzava novaDrzava)
         {
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
@@ -82,10 +76,10 @@ namespace PlayerWebApp.EU.Controllers
 
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
-                var json = JsonConvert.SerializeObject(noviIgrac);
+                var json = JsonConvert.SerializeObject(novaDrzava);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage Res = await client.PostAsync("/api/players?region=EU", content);
+                HttpResponseMessage Res = await client.PostAsync("/api/Drzava", content);
                 if (Res.StatusCode != HttpStatusCode.Accepted)
                 {
                     return new HttpStatusCodeResult(Res.StatusCode, Res.Content.ToString());
@@ -95,67 +89,41 @@ namespace PlayerWebApp.EU.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public ActionResult About()
-        {
-
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
 
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            AddOrEditIgrac igrac = new AddOrEditIgrac();
-            List<Klub> KlubInfo = new List<Klub>();
-
+            Drzava drzava = new Drzava();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = await client.GetAsync("players/" + id.ToString() + "?region=EU");
+                var responseTask = await client.GetAsync("Drzava/" + id.ToString());
 
                 if (responseTask.IsSuccessStatusCode)
                 {
                     // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
                     // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
-                    igrac = await responseTask.Content.ReadAsAsync<AddOrEditIgrac>();
+                    drzava = await responseTask.Content.ReadAsAsync<Drzava>();
                 }
-
-                HttpResponseMessage Res = await client.GetAsync("/api/Klub");
-
-                if (Res.IsSuccessStatusCode)
-                {
-                    var IgracResponse = Res.Content.ReadAsStringAsync().Result;
-                    KlubInfo = JsonConvert.DeserializeObject<List<Klub>>(IgracResponse);
-                }
-
-                List<SelectListItem> clubList = new List<SelectListItem>();
-                foreach (var item in KlubInfo)
-                {
-                    clubList.Add(new SelectListItem { Text = item.NazivKluba, Value = item.ID.ToString() });
-                }
-
-                ViewBag.Clubs = clubList;
 
             }
-            return View(igrac);
+            return View(drzava);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(AddOrEditIgrac igrac)
+        public async Task<ActionResult> Edit(Drzava drzava)
         {
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://localhost:59466/api/Players/");
-                var json = JsonConvert.SerializeObject(igrac);
+                client.BaseAddress = new Uri($"http://localhost:59466/api/Drzava/");
+                var json = JsonConvert.SerializeObject(drzava);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 //HTTP POST
-                var result = await client.PutAsync(igrac.ID.ToString(), content);
+                var result = await client.PutAsync(drzava.ID.ToString(), content);
                 if (!result.IsSuccessStatusCode)
                 {
                     return new HttpStatusCodeResult(result.StatusCode, result.Content.ToString());
@@ -171,26 +139,26 @@ namespace PlayerWebApp.EU.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Igrac igrac = new Igrac();
+            Drzava drzava = new Drzava();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = await client.GetAsync("players/" + ID.ToString() + "?region=EU");
+                var responseTask = await client.GetAsync("Drzava/" + ID.ToString());
 
                 if (responseTask.IsSuccessStatusCode)
                 {
                     // var responseTask = responseTask.Content.ReadAsStringAsync().Result;
                     // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
-                    igrac = await responseTask.Content.ReadAsAsync<Igrac>();
+                    drzava = await responseTask.Content.ReadAsAsync<Drzava>();
                 }
             }
 
-            if (igrac == null)
+            if (drzava == null)
             {
                 return HttpNotFound();
             }
-            return View(igrac);
+            return View(drzava);
         }
 
         // POST: Albums/Delete/5
@@ -202,7 +170,7 @@ namespace PlayerWebApp.EU.Controllers
             {
                 client.BaseAddress = new Uri("http://localhost:59466/api/");
                 //HTTP GET
-                var responseTask = await client.DeleteAsync("players/" + id.ToString());
+                var responseTask = await client.DeleteAsync("Drzava/" + id.ToString());
 
                 if (!responseTask.IsSuccessStatusCode)
                 {

@@ -16,7 +16,31 @@ using System.Web.Mvc;
 
 namespace PlayerWebApp.EU.Controllers
 {
+
     public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}
+
+/*public class HomeController : Controller
     {
         
         //Hosted web API REST Service base url  
@@ -216,7 +240,7 @@ namespace PlayerWebApp.EU.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-    }
+    }*/
 
     //  using (var client = new HttpClient())
     //  {
@@ -232,7 +256,7 @@ namespace PlayerWebApp.EU.Controllers
     //     igrac = await Res.Content.ReadAsAsync<AddOrEditIgrac>();
 
     //IgracInfo = JsonConvert.DeserializeObject<List<Igrac>>(IgracResponse);
-}
+//}//
 
 
 //  return View(igrac);
