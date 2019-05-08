@@ -249,6 +249,10 @@
     <Content Include="Views\Drzava\Create.cshtml" />
     <Content Include="Views\Drzava\Edit.cshtml" />
     <Content Include="Views\Drzava\Delete.cshtml" />
+    <Content Include="Views\Klub\Details.cshtml" />
+    <Content Include="Views\Klub\Create.cshtml" />
+    <Content Include="Views\Klub\Edit.cshtml" />
+    <Content Include="Views\Klub\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

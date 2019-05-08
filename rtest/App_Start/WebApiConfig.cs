@@ -18,6 +18,7 @@ namespace rtest
             container.RegisterType<IKlubService, KlubServiceEU>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IDrazavaService, DrzavaService>();
+            
            
           // container.RegisterType<KlubServiceEU, IKlubService>();
 

@@ -13,6 +13,13 @@ namespace PlayersDatav1.UnitOfWork
 
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
+        //private readonly IPlayersContext _ipc;
+//
+       // public UnitOfWork(IPlayersContext ipc)
+      //  {
+          //  _ipc = ipc;
+       // }
+
         private PlayersContext _context = null;
         private IgracRepository _igracRepository;
         private KlubRepository _klubRepository;
