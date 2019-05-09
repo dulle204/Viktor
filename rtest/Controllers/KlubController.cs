@@ -38,7 +38,7 @@ namespace rtest.Controllers
                     ID = item.ID,
                   NazivKluba = item.NazivKluba,
                   Liga=item.Liga,
-                  Drzava=item.Drzava,
+                 
                  LigaID = item.LigaID
 
                 };
@@ -59,6 +59,8 @@ namespace rtest.Controllers
                 NazivKluba = data.NazivKluba,
                 Liga = data.Liga,
                 LigaID=data.LigaID
+               
+                
 
             };
 

@@ -57,13 +57,16 @@ namespace PlayersDomain
 
                 {
                    
-                    var liga = _uow.LigaRepository.GetByID(klub.LigaID).NazivLige;
+                    
 
                     model = new KlubDomainModel()
                     {
                         ID = klubg.ID,
-                        Liga = liga,
-                        LigaID = klub.LigaID
+                        NazivKluba = klubg.NazivKluba,
+                        LigaID = klubg.LigaID,
+                        Liga = _uow.LigaRepository.GetByID(klubg.LigaID).NazivLige
+                        
+                        
                        
                     };
 

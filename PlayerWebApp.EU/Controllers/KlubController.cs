@@ -106,7 +106,7 @@ namespace PlayerWebApp.EU.Controllers
                     // igrac = JsonConvert.DeserializeObject<AddOrEditIgrac>(IgracResponse);
                     klub = await responseTask.Content.ReadAsAsync<Klub>();
                 }
-
+                // fali Liga da bi create radio.<-------------------------------------------
             }
             return View(klub);
         }
