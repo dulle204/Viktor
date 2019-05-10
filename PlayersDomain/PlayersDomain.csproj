@@ -51,6 +51,7 @@
     <Compile Include="IDrazavaService.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IKlubService.cs" />
+    <Compile Include="ILigaService.cs" />
     <Compile Include="IPlayerService.cs" />
     <Compile Include="KlubServiceEU.cs" />
     <Compile Include="LigaService.cs" />

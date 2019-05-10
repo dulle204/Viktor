@@ -174,12 +174,14 @@
     <Compile Include="Controllers\DrzavaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlubController.cs" />
+    <Compile Include="Controllers\LigaController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DrzavaModel.cs" />
     <Compile Include="Models\KlubModel.cs" />
+    <Compile Include="Models\LigaModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -276,6 +278,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Drzava\" />
     <Folder Include="Views\Klub\" />
+    <Folder Include="Views\Liga\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

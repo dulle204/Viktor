@@ -96,7 +96,7 @@ namespace rtest.Controllers
         }
 
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutIgrac(int id, [FromBody]KlubModel klub)
+        public IHttpActionResult PutKlub(int id, [FromBody]KlubModel klub)
         {
             if (!ModelState.IsValid)
             {
