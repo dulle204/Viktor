@@ -9,27 +9,27 @@ namespace rtest.Models
 {
     public class PlayerModel
     {
-        [JsonProperty("id")]
+       // [JsonProperty("id")]
         [JsonRequired]
         public int ID { get; set; }
-        [JsonProperty("ime")]
-        [JsonRequired]
+       // [JsonProperty("ime")]
+        //[JsonRequired]
         [StringLength(50)]
         public string  Ime{ get; set; }
 
-        [JsonProperty("prezime")]
+       // [JsonProperty("prezime")]
         public string Prezime { get; set; }
 
-        [JsonProperty("visina")]
+       // [JsonProperty("visina")]
         public int Visina { get; set; }
 
-        [JsonProperty("tezina")]
+       // [JsonProperty("tezina")]
         public int  Tezina{ get; set; }
 
-        [JsonProperty("klub_id")]
+        //[JsonProperty("klub_id")]
         public int KlubId { get; set; }
 
-        [JsonProperty("drzava_id")]
+        //[JsonProperty("drzava_id")]
         public int DrzavaId { get; set; }
 
         public string Klub { get; set; }

@@ -147,6 +147,7 @@
     <Compile Include="Controllers\DrzavaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlubController.cs" />
+    <Compile Include="Controllers\LigaController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +254,11 @@
     <Content Include="Views\Klub\Create.cshtml" />
     <Content Include="Views\Klub\Edit.cshtml" />
     <Content Include="Views\Klub\Delete.cshtml" />
+    <Content Include="Views\Liga\Index.cshtml" />
+    <Content Include="Views\Liga\Details.cshtml" />
+    <Content Include="Views\Liga\Edit.cshtml" />
+    <Content Include="Views\Liga\Delete.cshtml" />
+    <Content Include="Views\Liga\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

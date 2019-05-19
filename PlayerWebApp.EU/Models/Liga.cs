@@ -12,23 +12,14 @@ namespace PlayerWebApp.EU.Models
 
     public  class Liga
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Liga()
-        {
-            Klubs = new HashSet<Klub>();
-        }
+
 
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(60)]
         public string NazivLige { get; set; }
 
         public int DrzavaID { get; set; }
 
-        public virtual Drzava Drzava { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Klub> Klubs { get; set; }
+      
     }
 }

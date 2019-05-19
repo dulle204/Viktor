@@ -1,0 +1,42 @@
+﻿@model PlayerWebApp.EU.Models.Liga
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Liga</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NazivLige)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NazivLige)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DrzavaID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DrzavaID)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
