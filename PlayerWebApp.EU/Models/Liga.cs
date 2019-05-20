@@ -20,6 +20,8 @@ namespace PlayerWebApp.EU.Models
 
         public int DrzavaID { get; set; }
 
+        public string Drzava { get; set; }
+
       
     }
 }

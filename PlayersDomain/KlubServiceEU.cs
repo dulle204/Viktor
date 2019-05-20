@@ -83,6 +83,7 @@ namespace PlayersDomain
                 Klub noviKlub = new Klub
                 {
                     NazivKluba = klub.NazivKluba,
+                    LigaID=klub.LigaID
                 
                 };
 
