@@ -113,18 +113,18 @@ namespace PlayerWebApp.EU.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(Klub klub)
+        public async Task<ActionResult> Edit(Liga liga)
         {
             if (!ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri($"http://localhost:59466/api/Klub/");
-                var json = JsonConvert.SerializeObject(klub);
+                client.BaseAddress = new Uri($"http://localhost:59466/api/Liga/");
+                var json = JsonConvert.SerializeObject(liga);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 //HTTP POST
-                var result = await client.PutAsync(klub.ID.ToString(), content);
+                var result = await client.PutAsync(liga.ID.ToString(), content);
                 if (!result.IsSuccessStatusCode)
                 {
                     return new HttpStatusCodeResult(result.StatusCode, result.Content.ToString());
