@@ -19,5 +19,6 @@ namespace PlayersDatav1
         DbSet<Klub> Klubs { get; set; }
         DbSet<Liga> Ligas { get; set; }
         DbSet<Drzava> Drzavas { get; set; }
+        DbSet<Korisnik> Korisniks { get; set; }
     }
 }

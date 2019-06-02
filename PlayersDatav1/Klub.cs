@@ -27,6 +27,5 @@ namespace PlayersDatav1
         public virtual ICollection<Igrac> Igracs { get; set; }
 
         public virtual Liga Liga { get; set; }
-     
     }
 }

@@ -19,6 +19,7 @@ namespace PlayersDatav1
         public virtual DbSet<Igrac> Igracs { get; set; }
         public virtual DbSet<Klub> Klubs { get; set; }
         public virtual DbSet<Liga> Ligas { get; set; }
+        public virtual DbSet<Korisnik> Korisniks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

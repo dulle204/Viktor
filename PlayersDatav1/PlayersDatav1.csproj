@@ -54,6 +54,7 @@
     <Compile Include="Igrac.cs" />
     <Compile Include="IPlayersContext.cs" />
     <Compile Include="Klub.cs" />
+    <Compile Include="Korisnik.cs" />
     <Compile Include="Liga.cs" />
     <Compile Include="PlayersContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
