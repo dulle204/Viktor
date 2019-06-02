@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PlayersDomain
 {
-     public class LigaService:ILigaService
+    public class LigaService : ILigaService
     {
         private readonly IUnitOfWork _uow;
 
@@ -21,10 +21,11 @@ namespace PlayersDomain
         {
             List<LigaDomianModel> list = new List<LigaDomianModel>();
 
-            // using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
-            //{
-
             var lige = _uow.LigaRepository.Get();
+            if (lige == null)
+            {
+                return new List<LigaDomianModel>();
+            }
             LigaDomianModel model = null;
             foreach (var item in lige)
             {
@@ -36,9 +37,7 @@ namespace PlayersDomain
                     ID = item.ID,
                     NazivLige = item.NazivLige,
                     DrzavaID = item.DrzavaID,
-                    Drzava=drzava.NazivDrzave
-
-
+                    Drzava = drzava.NazivDrzave
                 };
 
                 list.Add(model);
@@ -51,41 +50,29 @@ namespace PlayersDomain
         {
             LigaDomianModel liga = new LigaDomianModel();
 
-            //using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
-            //{
             var ligag = _uow.LigaRepository.Get(x => x.ID == id).FirstOrDefault();
             LigaDomianModel model = null;
 
+            model = new LigaDomianModel()
             {
+                ID = ligag.ID,
+                NazivLige = ligag.NazivLige,
+                DrzavaID = ligag.DrzavaID,
+                Drzava = _uow.DrzavaRepository.GetByID(ligag.DrzavaID).NazivDrzave
+            };
+
+            return model;
 
 
-
-                model = new LigaDomianModel()
-                {
-                    ID = ligag.ID,
-                    NazivLige = ligag.NazivLige,
-                    DrzavaID = ligag.DrzavaID,
-                    Drzava = _uow.DrzavaRepository.GetByID(ligag.DrzavaID).NazivDrzave
-
-
-
-                };
-
-                return model;
-
-            }
         }
 
 
         public void AddLiga(LigaDomianModel liga)
         {
-            //using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
-            //{
             Liga novaLiga = new Liga
             {
                 NazivLige = liga.NazivLige,
-                DrzavaID=liga.DrzavaID
-
+                DrzavaID = liga.DrzavaID
             };
 
             if (novaLiga != null)
@@ -93,31 +80,24 @@ namespace PlayersDomain
                 _uow.LigaRepository.Insert(novaLiga);
                 _uow.Save();
             }
-
         }
 
         public void UpdateLiga(int id, LigaDomianModel liga)
         {
-            // using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
-            //{
             var izmenjenaLiga = _uow.LigaRepository.Get(x => x.ID == id).FirstOrDefault();
             izmenjenaLiga.NazivLige = liga.NazivLige;
             izmenjenaLiga.DrzavaID = liga.DrzavaID;
 
             _uow.LigaRepository.Update(izmenjenaLiga);
             _uow.Save();
-
         }
 
         public void DeleteLiga(int id)
         {
-            // using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
-            //{
             _uow.LigaRepository.Delete(id);
             _uow.Save();
-
         }
     }
 }
-    
+
 

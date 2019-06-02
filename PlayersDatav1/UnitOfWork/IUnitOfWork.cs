@@ -7,7 +7,7 @@ namespace PlayersDatav1.UnitOfWork
         DrzavaRepository DrzavaRepository { get; }
         IgracRepository IgracRepository { get; }
         KlubRepository KlubRepository { get; }
-        LigaRepository LigaRepository { get; }
+        ILigaRepository LigaRepository { get; }
 
         void Dispose();
         void Save();

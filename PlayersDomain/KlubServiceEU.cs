@@ -8,40 +8,40 @@ using PlayersDatav1.UnitOfWork;
 
 namespace PlayersDomain
 {
-     public class KlubServiceEU: IKlubService
+    public class KlubServiceEU : IKlubService
     {
         private readonly IUnitOfWork _uow;
 
-       public KlubServiceEU(IUnitOfWork uow)
-       {
-        _uow = uow;
-      }
+        public KlubServiceEU(IUnitOfWork uow)
+        {
+            _uow = uow;
+        }
 
         public List<KlubDomainModel> GetKlubs()
         {
             List<KlubDomainModel> list = new List<KlubDomainModel>();
 
-           // using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
+            // using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
             //{
-        
-                var klubovi = _uow.KlubRepository.Get();
-                KlubDomainModel model = null;
-                foreach (var item in klubovi)
+
+            var klubovi = _uow.KlubRepository.Get();
+            KlubDomainModel model = null;
+            foreach (var item in klubovi)
+            {
+
+                var liga = _uow.LigaRepository.GetByID(item.LigaID);
+
+                model = new KlubDomainModel()
                 {
-                    
-                    var liga = _uow.LigaRepository.GetByID(item.LigaID);
-
-                    model = new KlubDomainModel()
-                    {
-                        ID = item.ID,
-                        NazivKluba = item.NazivKluba,
-                        Liga=_uow.LigaRepository.GetByID(item.LigaID).NazivLige
+                    ID = item.ID,
+                    NazivKluba = item.NazivKluba,
+                    Liga = _uow.LigaRepository.GetByID(item.LigaID).NazivLige
 
 
-                    };
+                };
 
-                    list.Add(model);
-                }
+                list.Add(model);
+            }
 
             return list;
         }
@@ -50,71 +50,65 @@ namespace PlayersDomain
         {
             KlubDomainModel klub = new KlubDomainModel();
 
-            //using (UnitOfWork uow = new UnitOfWork(new PlayersDatav1.PlayersContext()))
-            //{
-                var klubg = _uow.KlubRepository.Get(x => x.ID == id).FirstOrDefault();
+            var klubg = _uow.KlubRepository.Get(x => x.ID == id).FirstOrDefault();
             KlubDomainModel model = null;
 
-                {
-                   
-                    
+            model = new KlubDomainModel()
+            {
+                ID = klubg.ID,
+                NazivKluba = klubg.NazivKluba,
+                LigaID = klubg.LigaID,
+                Liga = _uow.LigaRepository.GetByID(klubg.LigaID).NazivLige
 
-                    model = new KlubDomainModel()
-                    {
-                        ID = klubg.ID,
-                        NazivKluba = klubg.NazivKluba,
-                        LigaID = klubg.LigaID,
-                        Liga = _uow.LigaRepository.GetByID(klubg.LigaID).NazivLige
-                        
-                        
-                       
-                    };
 
-                    return model;
 
-                }
-            }
-        
+            };
+
+            return model;
+
+
+        }
+
 
         public void AddKlub(KlubDomainModel klub)
         {
             //using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
             //{
-                Klub noviKlub = new Klub
-                {
-                    NazivKluba = klub.NazivKluba,
-                    LigaID=klub.LigaID
-                
-                };
+            Klub noviKlub = new Klub
+            {
+                NazivKluba = klub.NazivKluba,
+                LigaID = klub.LigaID
 
-                if (noviKlub != null)
-                {
-                    _uow.KlubRepository.Insert(noviKlub);
-                    _uow.Save();
-                }
-            
+            };
+
+            if (noviKlub != null)
+            {
+                _uow.KlubRepository.Insert(noviKlub);
+                _uow.Save();
+            }
+
         }
 
         public void UpdateKlub(int id, KlubDomainModel klub)
         {
-           // using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
+            // using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
             //{
-                var izmenjenKlub = _uow.KlubRepository.Get(x => x.ID == id).FirstOrDefault();
+            var izmenjenKlub = _uow.KlubRepository.Get(x => x.ID == id).FirstOrDefault();
             izmenjenKlub.NazivKluba = klub.NazivKluba;
             izmenjenKlub.LigaID = klub.LigaID;
 
-                _uow.KlubRepository.Update(izmenjenKlub);
-                _uow.Save();
-            
+            _uow.KlubRepository.Update(izmenjenKlub);
+            _uow.Save();
+
         }
 
         public void DeleteKlub(int id)
         {
-           // using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
+            // using (UnitOfWork uow = new UnitOfWork(new PlayersContext()))
             //{
-                _uow.KlubRepository.Delete(id);
-                _uow.Save();
-            
+            _uow.KlubRepository.Delete(id);
+            _uow.Save();
+
         }
     }
 }

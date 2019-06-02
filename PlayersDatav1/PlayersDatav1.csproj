@@ -61,6 +61,7 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\IgracRepository.cs" />
+    <Compile Include="Repositories\ILigaRepository.cs" />
     <Compile Include="Repositories\KlubRepository.cs" />
     <Compile Include="Repositories\LigaRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />

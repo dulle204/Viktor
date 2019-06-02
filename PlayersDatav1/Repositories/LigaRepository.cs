@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PlayersDatav1.Repositories
 {
-    public class LigaRepository : GenericRepository<Liga>
+    public class LigaRepository : GenericRepository<Liga>, ILigaRepository
     {
         public LigaRepository(PlayersContext context) : base(context)
         {

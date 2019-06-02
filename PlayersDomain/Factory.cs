@@ -11,8 +11,6 @@ namespace PlayersDomain
         private List<IPlayerService> Instaces { get; set; }
 
 
-
-
         public Factory()
         {
             Instaces = new List<IPlayerService>();
@@ -21,14 +19,12 @@ namespace PlayersDomain
             Instaces.Add(new PlayerServiceEU());
             Instaces.Add(new PlayerServiceUS());
           
-
         }
+
         public IPlayerService GetInstance(string par)
         {
             var instance = Instaces.FirstOrDefault(x => x.Region == par);
             return instance;
         }
-
-
     }
 }
