@@ -38,14 +38,18 @@ namespace PlayersDomain.Test
             {
                 ID = 1,
                 NazivLige = "Liga1",
-                DrzavaID=1
+                DrzavaID = 1,
+                
+               
 
             };
             Liga liga2 = new Liga
             {
                 ID = 2,
                 NazivLige = "Liga2",
-                DrzavaID=2
+                DrzavaID = 2,
+        
+               
             };
 
             Drzava drzava1 = new Drzava
@@ -72,7 +76,8 @@ namespace PlayersDomain.Test
 
             var drzavaRepositoryMock=new Mock<IDrzavaRepository>();
 
-            drzavaRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Drzava, bool>>>(), It.IsAny<Func<IQueryable<Drzava>, IOrderedQueryable<Drzava>>>(), It.IsAny<string>())).Returns(drzavas);
+            drzavaRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Drzava, bool>>>(), It.IsAny<Func<IQueryable<Drzava>, IOrderedQueryable<Drzava>>>(), It.IsAny<string>()))
+                .Returns(drzavas);
             uowMock.SetupGet(x => x.DrzavaRepository).Returns(drzavaRepositoryMock.Object);
 
 
@@ -80,14 +85,15 @@ namespace PlayersDomain.Test
 
             // Act
             var result = ligaService.GetLiga();
-            var re = drazavaService.GetDrzavas();
+            var re = drazavaService.GetDrzavaByID(1);
 
             // Assert
 
+           
             Assert.AreEqual(2, result.Count);
           //  Assert.AreEqual(2, re.Count);
            // Assert.IsInstanceOfType(result, typeof(List<DrzavaDomenModel>));
-            Assert.AreEqual("liga1", re.First().NazivDrzave,result.First().NazivLige);
+           Assert.AreEqual("liga1",result.First().NazivLige);
         }
     }
 }
