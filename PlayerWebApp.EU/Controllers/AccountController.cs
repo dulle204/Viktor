@@ -20,7 +20,7 @@ namespace PlayerWebApp.EU.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new PlayersContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new UsersModel())))
         {
         }
 
@@ -78,7 +78,7 @@ namespace PlayerWebApp.EU.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(User model)
         {
             if (ModelState.IsValid)
             {

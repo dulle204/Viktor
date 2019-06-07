@@ -16,4 +16,11 @@ namespace PlayerWebApp.EU.Models
 
     }
 
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext()
+            : base("name=UserModel")
+        {
+        }
+    }
 }
