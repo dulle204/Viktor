@@ -59,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DrzavaRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\IDrzavaRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\IgracRepository.cs" />
     <Compile Include="Repositories\ILigaRepository.cs" />

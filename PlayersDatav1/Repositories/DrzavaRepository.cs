@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PlayersDatav1.Repositories
 {
-    public class DrzavaRepository : GenericRepository<Drzava>
+     public class DrzavaRepository : GenericRepository<Drzava> ,IDrzavaRepository
     {
         public DrzavaRepository(PlayersContext context) : base(context)
         {

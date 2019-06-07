@@ -4,7 +4,7 @@ namespace PlayersDatav1.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        DrzavaRepository DrzavaRepository { get; }
+        IDrzavaRepository DrzavaRepository { get; }
         IgracRepository IgracRepository { get; }
         KlubRepository KlubRepository { get; }
         ILigaRepository LigaRepository { get; }

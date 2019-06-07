@@ -37,14 +37,31 @@ namespace PlayersDomain.Test
             Liga liga1 = new Liga
             {
                 ID = 1,
-                NazivLige = "Liga1"
+                NazivLige = "Liga1",
+                DrzavaID=1
+
             };
             Liga liga2 = new Liga
             {
                 ID = 2,
-                NazivLige = "Liga2"
+                NazivLige = "Liga2",
+                DrzavaID=2
+            };
+
+            Drzava drzava1 = new Drzava
+            {
+                ID = 1,
+                NazivDrzave = "drzava1"
+            };
+
+            Drzava drzava2 = new Drzava
+            {
+                ID = 2,
+                NazivDrzave = "drzava2" 
+                
             };
             List<Liga> lige = new List<Liga> { liga1, liga2 };
+            List<Drzava> drzavas = new List<Drzava> {drzava1,drzava2 };
             var uowMock = new Mock<IUnitOfWork>();
             var ligaRepositoryMock = new Mock<ILigaRepository>();
             ligaRepositoryMock
@@ -53,12 +70,24 @@ namespace PlayersDomain.Test
             uowMock.SetupGet(x => x.LigaRepository).Returns(ligaRepositoryMock.Object);
             ILigaService ligaService = new LigaService(uowMock.Object);
 
+            var drzavaRepositoryMock=new Mock<IDrzavaRepository>();
+
+            drzavaRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Drzava, bool>>>(), It.IsAny<Func<IQueryable<Drzava>, IOrderedQueryable<Drzava>>>(), It.IsAny<string>())).Returns(drzavas);
+            uowMock.SetupGet(x => x.DrzavaRepository).Returns(drzavaRepositoryMock.Object);
+
+
+            IDrazavaService drazavaService = new DrzavaService(uowMock.Object);
+
             // Act
             var result = ligaService.GetLiga();
+            var re = drazavaService.GetDrzavas();
 
             // Assert
+
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("liga1", result.First().NazivLige);
+          //  Assert.AreEqual(2, re.Count);
+           // Assert.IsInstanceOfType(result, typeof(List<DrzavaDomenModel>));
+            Assert.AreEqual("liga1", re.First().NazivDrzave,result.First().NazivLige);
         }
     }
 }

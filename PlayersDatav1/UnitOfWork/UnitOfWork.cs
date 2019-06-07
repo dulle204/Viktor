@@ -23,7 +23,7 @@ namespace PlayersDatav1.UnitOfWork
         private PlayersContext _context = null;
         private IgracRepository _igracRepository;
         private KlubRepository _klubRepository;
-        private DrzavaRepository _drzavaRepository;
+        private IDrzavaRepository _drzavaRepository;
         private ILigaRepository _ligaRepository;
 
         public UnitOfWork(PlayersContext context)
@@ -35,7 +35,7 @@ namespace PlayersDatav1.UnitOfWork
 
         public KlubRepository KlubRepository => _klubRepository ?? (_klubRepository = new KlubRepository(_context));
 
-        public DrzavaRepository DrzavaRepository => _drzavaRepository ?? (_drzavaRepository = new DrzavaRepository(_context));
+        public IDrzavaRepository DrzavaRepository => _drzavaRepository ?? (_drzavaRepository = new DrzavaRepository(_context));
 
         public ILigaRepository LigaRepository => _ligaRepository ?? (_ligaRepository = new LigaRepository(_context));
 
