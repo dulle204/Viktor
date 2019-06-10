@@ -65,35 +65,36 @@ namespace PlayersDomain.Test
                 
             };
             List<Liga> lige = new List<Liga> { liga1, liga2 };
-            List<Drzava> drzavas = new List<Drzava> {drzava1,drzava2 };
+            List<Drzava> drzava = new List<Drzava> {drzava1,drzava2 };
+
+
             var uowMock = new Mock<IUnitOfWork>();
             var ligaRepositoryMock = new Mock<ILigaRepository>();
+            var drzavaRepositoryMock = new Mock<IDrzavaRepository>();
             ligaRepositoryMock
                 .Setup(x => x.Get(It.IsAny<Expression<Func<Liga, bool>>>(), It.IsAny<Func<IQueryable<Liga>, IOrderedQueryable<Liga>>>(), It.IsAny<string>()))
                 .Returns(lige);
             uowMock.SetupGet(x => x.LigaRepository).Returns(ligaRepositoryMock.Object);
-            ILigaService ligaService = new LigaService(uowMock.Object);
-
-            var drzavaRepositoryMock=new Mock<IDrzavaRepository>();
-
             drzavaRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Drzava, bool>>>(), It.IsAny<Func<IQueryable<Drzava>, IOrderedQueryable<Drzava>>>(), It.IsAny<string>()))
-                .Returns(drzavas);
+               .Returns(drzava);
             uowMock.SetupGet(x => x.DrzavaRepository).Returns(drzavaRepositoryMock.Object);
 
 
             IDrazavaService drazavaService = new DrzavaService(uowMock.Object);
+            ILigaService ligaService = new LigaService(uowMock.Object);
+
+
 
             // Act
             var result = ligaService.GetLiga();
-            var re = drazavaService.GetDrzavaByID(1);
+            var re = drazavaService.GetDrzavas();
 
             // Assert
 
-           
-            Assert.AreEqual(2, result.Count);
-          //  Assert.AreEqual(2, re.Count);
-           // Assert.IsInstanceOfType(result, typeof(List<DrzavaDomenModel>));
-           Assert.AreEqual("liga1",result.First().NazivLige);
+            
+            Assert.AreEqual("liga1", result.First().NazivLige, result.First().DrzavaID.ToString(), re.First().NazivDrzave);
+            Assert.AreEqual(2, result.Count, re.Count);
+       
         }
     }
 }
