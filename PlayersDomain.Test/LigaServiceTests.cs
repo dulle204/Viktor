@@ -13,6 +13,8 @@ namespace PlayersDomain.Test
     [TestClass]
     public class LigaServiceTests
     {
+       
+
         [TestMethod]
         public void ShouldReturnEmptyListIfNoLIgaFound()
         {
@@ -37,16 +39,15 @@ namespace PlayersDomain.Test
             Liga liga1 = new Liga
             {
                 ID = 1,
-                NazivLige = "Liga1",
+                NazivLige = "liga1",
                 DrzavaID = 1,
-                
-               
+              
 
             };
             Liga liga2 = new Liga
             {
                 ID = 2,
-                NazivLige = "Liga2",
+                NazivLige = "liga2",
                 DrzavaID = 2,
         
                
@@ -71,6 +72,8 @@ namespace PlayersDomain.Test
             var uowMock = new Mock<IUnitOfWork>();
             var ligaRepositoryMock = new Mock<ILigaRepository>();
             var drzavaRepositoryMock = new Mock<IDrzavaRepository>();
+            
+
             ligaRepositoryMock
                 .Setup(x => x.Get(It.IsAny<Expression<Func<Liga, bool>>>(), It.IsAny<Func<IQueryable<Liga>, IOrderedQueryable<Liga>>>(), It.IsAny<string>()))
                 .Returns(lige);
@@ -78,22 +81,34 @@ namespace PlayersDomain.Test
             drzavaRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Drzava, bool>>>(), It.IsAny<Func<IQueryable<Drzava>, IOrderedQueryable<Drzava>>>(), It.IsAny<string>()))
                .Returns(drzava);
             uowMock.SetupGet(x => x.DrzavaRepository).Returns(drzavaRepositoryMock.Object);
+            drzavaRepositoryMock.Setup(x => x.GetByID(It.IsAny<int>())).Returns(drzava1);
+            uowMock.SetupGet(x => x.DrzavaRepository).Returns(drzavaRepositoryMock.Object);
 
 
+            //var mockobject = drzavaRepositoryMock.Object;
+
+            //Returns your mocked new User() instance
+
+            var mockobject =  drzavaRepositoryMock.Object;
             IDrazavaService drazavaService = new DrzavaService(uowMock.Object);
             ILigaService ligaService = new LigaService(uowMock.Object);
+          
+      
+
 
 
 
             // Act
             var result = ligaService.GetLiga();
-            var re = drazavaService.GetDrzavas();
+            var re = drazavaService.GetDrzavaByID(1);
+            var newDrzavaObject = mockobject.GetByID(1);
+
 
             // Assert
 
-            
-            Assert.AreEqual("liga1", result.First().NazivLige, result.First().DrzavaID.ToString(), re.First().NazivDrzave);
-            Assert.AreEqual(2, result.Count, re.Count);
+
+            Assert.AreEqual("liga1", result.First().NazivLige, result.First().DrzavaID.ToString(), newDrzavaObject.ID, "1", newDrzavaObject.NazivDrzave ,"drzava1");
+            Assert.AreEqual(2, result.Count);
        
         }
     }
